@@ -1,0 +1,9 @@
+h1 = question.title
+h2 = question.body
+= form_with model: [question, answer] do |f|
+  div.field
+    = f.label :body
+    br
+    = f.text_area :body
+  div.actions
+    = f.submit
