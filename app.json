@@ -3,7 +3,7 @@
   "description": "Thinknetica project",
   "image": "heroku/ruby",
   "scripts": {
-    "postdeploy": "bin/rails db:migrate"
+    "postdeploy": "bin/rails db:setup"
   },
   "addons": [
     "heroku-postgresql"
