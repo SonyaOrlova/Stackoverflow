@@ -30,7 +30,6 @@
 
 /config/database.yml
 
-.rubocop.yml
 .ruby-gemset
 
 /public/packs

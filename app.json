@@ -1,0 +1,16 @@
+{
+  "name": "Stackoverflow",
+  "description": "Thinknetica project",
+  "image": "heroku/ruby",
+  "scripts": {
+    "postdeploy": "bin/rails db:migrate"
+  },
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}
