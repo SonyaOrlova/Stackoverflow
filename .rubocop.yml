@@ -1,0 +1,22 @@
+require: rubocop-rails
+
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'spec/*'
+    - 'Gemfile'
+    - 'Rakefile'
+    - 'config.ru'
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+
+Documentation:
+  Enabled: false
+  
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 150
