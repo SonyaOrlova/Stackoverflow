@@ -1,0 +1,66 @@
+ html {
+  background-color: lightgray;
+ }
+
+ body {
+  margin: 0 auto;
+
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 18px;
+  line-height: 24px;
+  color: #000;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;
+  max-width: 768px;
+
+  background-color: white;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+p {
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+h1 {
+  font-size: 30px;
+  line-height: 36px;
+}
+
+h2 {
+  font-size: 22px;
+  line-height: 28px;
+}
+
+h3, h4, h5, h6 {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  position: relative;
+
+  padding-left: 15px;
+
+  &::before {
+    position: absolute;
+    content: '•';
+    left: 0;
+  }
+}

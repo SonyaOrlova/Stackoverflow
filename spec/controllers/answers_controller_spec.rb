@@ -5,16 +5,16 @@ RSpec.describe AnswersController, type: :controller do
 
   describe 'POST#create' do
     context 'valid attributes' do
-      it 'save a new answer and redirects to show view' do
+      it 'save a new answer and redirects to question show view' do
         expect { post :create, params: { question_id: question, answer: attributes_for(:answer) } }.to change(question.answers, :count).by(1)
-        expect(response).to redirect_to assigns(:exposed_answer)
+        expect(response).to redirect_to assigns(:exposed_question)
       end
     end
 
     context 'invalid attributes' do
-      it 'does not save a new answer and renders new template' do
+      it 'does not save a new answer and redirects to question show view' do
         expect { post :create, params: { question_id: question, answer: attributes_for(:answer, :invalid) } }.to_not change(question.answers, :count)
-        expect(response).to render_template :new
+        expect(response).to render_template 'questions/show'
       end
     end
   end

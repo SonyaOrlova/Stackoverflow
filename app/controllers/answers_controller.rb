@@ -4,9 +4,9 @@ class AnswersController < ApplicationController
 
   def create
     if answer.save
-      redirect_to answer_path(answer)
+      redirect_to question, notice: 'Answer was successfuly created'
     else
-      render :new
+      render 'questions/show'
     end
   end
 

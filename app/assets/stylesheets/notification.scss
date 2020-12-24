@@ -1,0 +1,19 @@
+.notification {
+  margin-bottom: 30px;
+
+  &__message {
+    padding-bottom: 30px;
+
+    &_type_notice {
+      color: darkgreen;
+
+      border-bottom: 5px double darkgreen;
+    }
+
+    &_type_alert {
+      color: darkred;
+
+      border-bottom: 5px double darkred;
+    }
+  }
+}

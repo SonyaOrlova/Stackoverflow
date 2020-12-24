@@ -1,0 +1,6 @@
+- if resource&.errors.present?
+  .notification
+    .notification__message.notification__message_type_alert
+      ul
+        -resource.errors.full_messages.each do |message|
+          li = message

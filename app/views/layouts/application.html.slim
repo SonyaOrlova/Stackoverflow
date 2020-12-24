@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title Stackoverflow
+    meta[charset='utf-8']
+    meta[name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no']
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body
+    .header
+      p.header__logo
+        = link_to "Stackoverflow", root_path
+    .main
+      - if flash.present?
+        .notification
+          - if notice
+            .notification__message.notification__message_type_notice = notice
+          - if alert
+            .notification__message.notification__message_type_alert = alert
+
+      = yield
+
+    .footer
+      .footer__github-link = link_to 'Github', 'https://github.com/SonyaOrlova/Stackoverflow'
