@@ -6,15 +6,19 @@
     h2.question__body = question.body
 
   ul.list
-    - question.answers.where.not(id: nil).each do |answer|
-      li.list__item
-        span.list__item-title = answer.body
+    - question.answers.each do |answer|
+      - if answer.persisted?
+        li.list__item
+          span.list__item-title = answer.body
+          - if current_user&.author?(answer)
+            = link_to 'Delete', answer, method: :delete, class: 'list__item-action'
 
-  .form
-    p.form__title New answer
-    = form_with model: [question, answer], local: true do |form|
-      div.form__field
-        = form.label :body
-        = form.text_area :body
-      div.form__action
-        = form.submit 'Reply'
+  - if user_signed_in?
+    .form
+      p.form__title New answer
+      = form_with model: [question, answer], local: true do |f|
+        div.form__field
+          = f.label :body
+          = f.text_area :body
+        div.form__action
+          = f.submit 'Reply'

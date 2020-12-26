@@ -28,6 +28,30 @@
       color: midnightblue;
     }
   }
+
+  &__nav {
+    display: flex;
+
+    p {
+      a {
+        font-weight: bold;
+      }
+        
+      &:not(:last-child) {
+        position: relative;
+
+        margin-right: 5px;
+        padding-right: 15px;
+
+        &::after {
+          position: absolute;
+          content: '•';
+          right: 0;
+          width: 10px;
+        }
+      }
+    }
+  }
 }
 
 .footer {

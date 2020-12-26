@@ -1,8 +1,12 @@
 class QuestionsController < ApplicationController
-  expose :question
+  before_action :authenticate_user!, except: %i[index show]
+
+  expose :question, build: ->(question_params) { current_user&.created_questions&.new(question_params) || Question.new(question_params) }
   expose :questions, -> { Question.all }
 
   expose :answer, -> { question.answers.new }
+
+  def index; end
 
   def create
     if question.save
@@ -10,6 +14,16 @@ class QuestionsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show; end
+
+  def destroy
+    question.destroy
+
+    flash.now[:notice] = 'Question was successfully deleted'
+
+    render :index
   end
 
   private

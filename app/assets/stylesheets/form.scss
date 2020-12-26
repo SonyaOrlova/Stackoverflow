@@ -43,7 +43,26 @@
 
     textarea {
       resize: none;
-    } 
+    }
+
+    &_type_checkbox {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      label {
+        margin-bottom: 0;
+        margin-left: 15px;
+      }
+
+      input {
+        margin: 0;
+        padding: 0;
+
+        width: 20px;
+        height: 20px;
+      }
+    }
   }
 
   &__action {
@@ -62,5 +81,12 @@
 
       background: lightgray;
     }
+  }
+
+  &__field-caption {
+    font-size: 14px;
+    line-height: 18px;
+    font-style: italic;
+    color: gray;
   }
 }

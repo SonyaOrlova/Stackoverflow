@@ -20,3 +20,9 @@ Style/FrozenStringLiteralComment:
 
 Metrics/LineLength:
   Max: 150
+
+Metrics/BlockLength:
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false
