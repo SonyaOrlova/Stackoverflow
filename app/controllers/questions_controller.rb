@@ -1,32 +1,41 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
 
-  expose :question, build: ->(question_params) { current_user&.created_questions&.new(question_params) || Question.new(question_params) }
-  expose :questions, -> { Question.all }
+  before_action :question, only: %i[show destroy]
 
-  expose :answer, -> { question.answers.new }
+  def index
+    @questions = Question.all
+  end
 
-  def index; end
+  def new
+    @question = Question.new
+  end
 
   def create
-    if question.save
-      redirect_to question, notice: 'Question was successfuly created'
+    @question = current_user.created_questions.new(question_params)
+
+    if @question.save
+      redirect_to @question, notice: 'Question was successfuly created'
     else
       render :new
     end
   end
 
-  def show; end
+  def show
+    @answer = @question.answers.new
+  end
 
   def destroy
-    question.destroy
+    @question.destroy
 
-    flash.now[:notice] = 'Question was successfully deleted'
-
-    render :index
+    redirect_to questions_path, notice: 'Question was successfully deleted'
   end
 
   private
+
+  def question
+    @question = Question.find(params[:id])
+  end
 
   def question_params
     params.require(:question).permit(:title, :body)

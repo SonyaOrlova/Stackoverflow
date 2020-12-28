@@ -10,7 +10,7 @@ RSpec.describe QuestionsController, type: :controller do
     context 'valid attributes' do
       it 'save a new question and redirects to show view' do
         expect { post :create, params: { question: attributes_for(:question) } }.to change(Question, :count).by(1)
-        expect(response).to redirect_to assigns(:exposed_question)
+        expect(response).to redirect_to assigns(:question)
       end
     end
 

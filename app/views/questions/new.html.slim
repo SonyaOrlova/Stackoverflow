@@ -1,8 +1,8 @@
-= render 'shared/errors', resource: question
+= render 'shared/errors', resource: @question
 
 .form
   p.form__title New question
-  = form_with model: question do |f|
+  = form_with model: @question do |f|
     div.form__field
       = f.label :title
       = f.text_field :title

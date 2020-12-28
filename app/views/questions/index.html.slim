@@ -1,6 +1,6 @@
 .questions
   ul.list
-    - questions.each do |question|
+    - @questions.each do |question|
       li.list__item
         = link_to question.title, question_path(question), class: 'list__item-title'
         - if current_user&.author?(question)
