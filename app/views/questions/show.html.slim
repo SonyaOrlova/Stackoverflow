@@ -1,2 +1,24 @@
-h1 = question.title
-h2 = question.body
+= render 'shared/errors', resource: @answer
+
+.question
+  .question__info
+    h1.question__title = @question.title
+    h2.question__body = @question.body
+
+  ul.list
+    - @question.answers.each do |answer|
+      - if answer.persisted?
+        li.list__item
+          span.list__item-title = answer.body
+          - if current_user&.author?(answer)
+            = link_to 'Delete', answer, method: :delete, class: 'list__item-action'
+
+  - if user_signed_in?
+    .form
+      p.form__title New answer
+      = form_with model: [@question, @answer], local: true do |f|
+        div.form__field
+          = f.label :body
+          = f.text_area :body
+        div.form__action
+          = f.submit 'Reply'

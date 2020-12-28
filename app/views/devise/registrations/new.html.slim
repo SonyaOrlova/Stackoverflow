@@ -1,0 +1,18 @@
+= render 'shared/errors', resource: resource
+
+.form
+  p.form__title Sign up
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    div.form__field
+      = f.label :email
+      = f.email_field :email, autofocus: true, autocomplete: 'email'
+    div.form__field
+      = f.label :password
+      - if @minimum_password_length
+        span.form__field-caption = "#{@minimum_password_length} characters minimum"
+      = f.password_field :password, autocomplete: 'new-password'
+    div.form__field
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation, autocomplete: 'new-password'
+    div.form__action
+      = f.submit 'Sign up'

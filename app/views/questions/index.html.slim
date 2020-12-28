@@ -1,0 +1,10 @@
+.questions
+  ul.list
+    - @questions.each do |question|
+      li.list__item
+        = link_to question.title, question_path(question), class: 'list__item-title'
+        - if current_user&.author?(question)
+          = link_to 'Delete', question, method: :delete, class: 'list__item-action'
+
+  - if user_signed_in?
+    p.questions__action = link_to 'Ask question', new_question_path

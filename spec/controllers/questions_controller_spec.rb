@@ -1,13 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
-  let(:question) { create(:question) }
+  let(:user) { create(:user) }
+  let(:question) { create(:question, author: user) }
+
+  before { sign_in_user(user) }
 
   describe 'POST#create' do
     context 'valid attributes' do
       it 'save a new question and redirects to show view' do
         expect { post :create, params: { question: attributes_for(:question) } }.to change(Question, :count).by(1)
-        expect(response).to redirect_to assigns(:exposed_question)
+        expect(response).to redirect_to assigns(:question)
       end
     end
 

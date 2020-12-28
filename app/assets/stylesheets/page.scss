@@ -1,0 +1,74 @@
+.main {
+  padding: 2.5% 5%;
+  box-sizing: border-box;
+
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.header {
+  padding: 2.5% 5%;
+
+  display: flex;
+
+  border-bottom: 5px solid lightgray;
+
+  &__logo {
+    margin-right: auto;
+    
+    a {
+      font-size: 36px;
+      line-height: 45px;
+      font-weight: bold;
+      font-style: italic;
+      color: midnightblue;
+    }
+  }
+
+  &__nav {
+    display: flex;
+
+    p {
+      a {
+        font-weight: bold;
+      }
+        
+      &:not(:last-child) {
+        position: relative;
+
+        margin-right: 5px;
+        padding-right: 15px;
+
+        &::after {
+          position: absolute;
+          content: '•';
+          right: 0;
+          width: 10px;
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  padding: 2.5% 5%;
+  margin-top: auto;
+
+  display: flex;
+
+  border-top: 5px solid lightgray;
+
+  &__github-link {
+    margin-left: auto;
+
+    a {
+      font-size: 14px;
+      line-height: 18px;
+      color: gray;
+    }
+  }
+}

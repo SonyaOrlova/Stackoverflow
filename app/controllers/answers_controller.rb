@@ -1,13 +1,27 @@
 class AnswersController < ApplicationController
-  expose :question, -> { Question.find(params[:question_id]) if params[:question_id] }
-  expose :answer, scope: -> { question&.answers || Answer }
+  before_action :authenticate_user!
+
+  def new; end
 
   def create
-    if answer.save
-      redirect_to answer_path(answer)
+    @question = @question = Question.find(params[:question_id])
+
+    @answer = @question.answers.new(answer_params)
+    @answer.author = current_user
+
+    if @answer.save
+      redirect_to @question, notice: 'Answer was successfuly created'
     else
-      render :new
+      render 'questions/show'
     end
+  end
+
+  def destroy
+    @answer = Answer.find(params[:id])
+
+    @answer.destroy
+
+    redirect_to @answer.question, notice: 'Answer was successfully deleted'
   end
 
   private
