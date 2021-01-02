@@ -1,0 +1,40 @@
+.hidden {
+  display: none !important;
+}
+
+.list {
+  margin-bottom: 30px;
+
+  &__item {
+    display: flex;
+    flex-wrap: wrap;
+
+    border-bottom: 1px solid lightgray;
+
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+
+  &__item-title {
+    display: block;
+
+    margin-right: 15px;
+
+    flex-grow: 1;
+  }
+
+  &__item-action {
+    display: block;
+
+    color: darkgreen;
+    
+    &_type_alert {
+      color: darkred;
+    }
+
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+  }
+}

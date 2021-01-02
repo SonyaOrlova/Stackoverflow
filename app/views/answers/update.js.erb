@@ -1,0 +1,17 @@
+var mainEl = document.querySelector('.main');
+var notificationEl = mainEl.querySelector('.notification');
+
+if (notificationEl) mainEl.removeChild(notificationEl);
+
+<% unless @answer.errors.present? %>
+  mainEl.insertAdjacentHTML('afterbegin', '<%= render "shared/success", content: "Answer was successfully updated" %>');
+
+  var answersEl = mainEl.querySelector('.answers');
+
+  var updatedAnswerTemp = document.createElement('template');
+  updatedAnswerTemp.innerHTML = '<%= j render @answer %>';
+
+  answersEl.querySelector(`#answer-${<%= @answer.id %>}`).replaceWith(updatedAnswerTemp.content.firstChild);
+<% else %>
+  mainEl.insertAdjacentHTML('afterbegin', '<%= render "shared/errors", resource: @answer %>');
+<% end %>

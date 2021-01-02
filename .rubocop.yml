@@ -19,7 +19,7 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 Metrics/LineLength:
-  Max: 150
+  Max: 200
 
 Metrics/BlockLength:
   Enabled: false
