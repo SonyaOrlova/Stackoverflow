@@ -80,4 +80,30 @@ RSpec.describe QuestionsController, type: :controller do
       end
     end
   end
+
+  describe 'POST #set_best_answer' do
+    context 'author' do
+      before { sign_in_user(user) }
+
+      it 'marks question best answer' do
+        answer = create(:answer, question: question, author: user)
+
+        post :set_best_answer, params: { id: question, answer: answer }, format: :js
+        question.reload
+
+        expect(question.best_answer_id).to eq answer.id
+      end
+    end
+
+    context 'not author' do
+      it 'can not mark question best answer ' do
+        answer = create(:answer, question: question, author: user)
+
+        post :set_best_answer, params: { id: question, answer: answer }, format: :js
+        question.reload
+
+        expect(question.best_answer_id).not_to eq answer.id
+      end
+    end
+  end
 end

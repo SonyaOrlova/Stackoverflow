@@ -28,6 +28,10 @@
     display: block;
 
     color: darkgreen;
+
+    &_type_basic {
+      color: midnightblue;
+    }
     
     &_type_alert {
       color: darkred;

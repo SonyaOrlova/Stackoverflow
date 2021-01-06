@@ -1,5 +1,8 @@
-li.answer.list__item id ="answer-#{answer.id}"
+li class=['answer', answer.best? ? 'answer_type_best' : '', 'list__item'] id ="answer-#{answer.id}"
   span.list__item-title = answer.body
+  - if current_user&.author?(answer.question) && !answer.best?
+    = link_to 'Mark as best', set_best_answer_question_path(answer.question, answer: answer), method: :post, data: { remote: true }, class: 'list__item-action list__item-action_type_basic'
+    
   - if current_user&.author?(answer)
     = link_to 'Edit', '#', class: 'list__item-action answer__edit-link'
     = link_to 'Delete', answer, method: :delete, data: { remote: true }, class: 'list__item-action list__item-action_type_alert'

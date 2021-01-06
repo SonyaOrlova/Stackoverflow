@@ -6,7 +6,7 @@
     h2.question__body = @question.body
 
   ul.answers.list
-    - @question.answers.each do |answer|
+    - @question.answers.sort_by_best.each do |answer|
       - if answer.persisted?
         = render answer
 

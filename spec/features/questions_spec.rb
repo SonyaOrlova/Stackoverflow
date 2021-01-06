@@ -172,3 +172,45 @@ feature 'Authenticated user can delete the question' do
     end
   end
 end
+
+feature 'Authenticated user author of the question can set question best answer', js: true do
+  given(:user) { create(:user) }
+  given(:other_user) { create(:user) }
+
+  given!(:question) { create(:question, author: user) }
+  given!(:answers) { create_list(:answer, 4, question: question, author: other_user) }
+
+  describe 'Authenticated user' do
+    scenario 'author of the question can set question best answer' do
+      sign_in_user(user)
+      visit question_path(question)
+
+      best_answer = answers.last
+
+      within "#answer-#{best_answer.id}" do
+        expect(page).to have_content 'Mark as best'
+        click_on 'Mark as best'
+
+        expect(page).to_not have_content 'Mark as best'
+      end
+
+      expect(page).to have_css('.answer:first-child', text: best_answer.body)
+      expect(page).to have_content 'Question best answer was successfully updated'
+    end
+
+    scenario 'not author of the question can not set question best answer' do
+      sign_in_user(other_user)
+      visit question_path(question)
+
+      expect(page).to_not have_content 'Mark as best'
+    end
+  end
+
+  describe 'Unauthenticated user' do
+    scenario 'can not set question best answer' do
+      visit question_path(question)
+
+      expect(page).to_not have_content 'Mark as best'
+    end
+  end
+end

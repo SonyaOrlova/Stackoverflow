@@ -35,6 +35,13 @@ class QuestionsController < ApplicationController
     redirect_to questions_path, notice: 'Question was successfully deleted'
   end
 
+  def set_best_answer
+    answer = Answer.find(params[:answer])
+    @question = answer.question
+
+    @question.update({ best_answer_id: answer.id }) if current_user.author?(@question)
+  end
+
   private
 
   def question
