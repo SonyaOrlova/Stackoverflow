@@ -1,0 +1,14 @@
+var mainEl = document.querySelector('.main');
+var notificationEl = mainEl.querySelector('.notification');
+
+if (notificationEl) mainEl.removeChild(notificationEl);
+
+<% if @answer.persisted? %>
+  mainEl.querySelector('.answers').insertAdjacentHTML('beforeend', '<%= j render @answer %>');
+
+  mainEl.querySelector('.new-answer-textarea').value = '';
+
+  mainEl.insertAdjacentHTML('afterbegin', '<%= render "shared/success", content: "Answer was successfully created" %>');
+<% else %>
+  mainEl.insertAdjacentHTML('afterbegin', '<%= render "shared/errors", resource: @answer %>');
+<% end %>

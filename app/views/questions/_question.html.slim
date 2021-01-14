@@ -1,0 +1,15 @@
+li.question.list__item id ="question-#{question.id}"
+  = link_to question.title, question_path(question), class: 'list__item-title'
+  - if current_user&.author?(question)
+    = link_to 'Edit', '#', class: 'list__item-action question__edit-link'
+    = link_to 'Delete', question, method: :delete, class: 'list__item-action list__item-action_type_alert'
+    .form.form_type_inline.hidden
+      = form_with model: question, url: question_path(question), local: false do |f|
+        div.form__field
+          = f.label :title
+          = f.text_field :title
+        div.form__field
+          = f.label :body
+          = f.text_area :body
+        div.form__action
+          = f.submit 'Save'

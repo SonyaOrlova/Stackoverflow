@@ -14,9 +14,7 @@
   }
 
   &__field {
-    &:not(:last-child) {
-      margin-bottom: 15px;
-    }
+    margin-bottom: 15px;
 
     label {
       display: block;
@@ -25,6 +23,8 @@
     }
 
     input, select, textarea {
+      display: block;
+
       width: 100%;
       height: 40px;
 
@@ -66,12 +66,12 @@
   }
 
   &__action {
-    margin-top: 30px;
-
     text-align: right;
 
     input {
-      padding: 10px;
+      padding: 0 10px;
+
+      height: 50px;
 
       font-size: 18px;
       line-height: 24px;
@@ -88,5 +88,45 @@
     line-height: 18px;
     font-style: italic;
     color: gray;
+  }
+
+  &_type_inline {
+    width: 100%;
+
+    margin: 10px 0;
+    padding-top: 10px;
+
+    border-top: 1px dashed darkgreen;
+
+    form {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
+
+    .form__field {
+      flex-grow: 1;
+
+      margin: 0 15px 0 0;
+
+      label {
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: bold;
+      }
+    }
+
+    .form__action {
+      margin: 0;
+
+      input {
+        height: 40px;
+
+        font-size: 16px;
+        line-height: 22px;
+
+        background: lightgray;
+      }
+    }
   }
 }

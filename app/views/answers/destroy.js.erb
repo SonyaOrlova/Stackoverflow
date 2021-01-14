@@ -1,0 +1,10 @@
+var mainEl = document.querySelector('.main');
+var notificationEl = mainEl.querySelector('.notification');
+
+if (notificationEl) mainEl.removeChild(notificationEl);
+
+var answersEl = mainEl.querySelector('.answers');
+
+answersEl.removeChild(answersEl.querySelector(`#answer-${<%= @answer.id %>}`));
+
+mainEl.insertAdjacentHTML('afterbegin', '<%= render "shared/success", content: "Answer was successfully deleted" %>');
