@@ -1,0 +1,12 @@
+var mainEl = document.querySelector('.main');
+var notificationEl = mainEl.querySelector('.notification');
+
+if (notificationEl) mainEl.removeChild(notificationEl);
+
+var questionFilesEl = mainEl.querySelector('.question__files');;
+
+questionFilesEl.removeChild(questionFilesEl.querySelector(`#question-file-${<%= @file.id %>}`));
+
+if (!questionFilesEl.children.length) questionFilesEl.remove();
+
+mainEl.insertAdjacentHTML('afterbegin', '<%= render "shared/success", content: "File was successfully deleted" %>');

@@ -73,4 +73,24 @@ RSpec.describe AnswersController, type: :controller do
       end
     end
   end
+
+  describe 'POST #delete_file' do
+    context 'author' do
+      before { sign_in_user(user) }
+
+      it 'deletes the answer file' do
+        answer = create(:answer, :with_files_attached, question: question, author: user)
+
+        expect { post :delete_file, params: { id: answer, file: answer.files.first }, format: :js }.to change(answer.files, :count).by(-1)
+      end
+    end
+
+    context 'not author' do
+      it 'can not delete the answer file' do
+        answer = create(:answer, :with_files_attached, question: question, author: user)
+
+        expect { post :delete_file, params: { id: answer, file: answer.files.first }, format: :js }.not_to change(answer.files, :count)
+      end
+    end
+  end
 end

@@ -42,13 +42,19 @@ class QuestionsController < ApplicationController
     @question.update({ best_answer_id: answer.id }) if current_user.author?(@question)
   end
 
+  def delete_file
+    @file = ActiveStorage::Attachment.find(params[:file])
+
+    @file.purge if current_user.author?(@file.record)
+  end
+
   private
 
   def question
-    @question = Question.find(params[:id])
+    @question = Question.with_attached_files.find(params[:id])
   end
 
   def question_params
-    params.require(:question).permit(:title, :body)
+    params.require(:question).permit(:title, :body, files: [])
   end
 end

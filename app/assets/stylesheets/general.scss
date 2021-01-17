@@ -37,8 +37,8 @@
       color: darkred;
     }
 
-    &:not(:last-child) {
-      margin-right: 15px;
+    + .list__item-action {
+      margin-left: 15px;
     }
   }
 }

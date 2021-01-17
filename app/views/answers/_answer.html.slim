@@ -1,5 +1,11 @@
 li class=['answer', answer.best? ? 'answer_type_best' : '', 'list__item'] id ="answer-#{answer.id}"
-  span.list__item-title = answer.body
+  .list__item-title
+    span = answer.body
+    - if answer.files.attached?
+        .answer__files.list
+          - answer.files.each do |file|
+            .answer__file.list__item id ="answer-file-#{file.id}"
+              = link_to file.filename.to_s, url_for(file), class: 'list__item-title'
   - if current_user&.author?(answer.question) && !answer.best?
     = link_to 'Mark as best', set_best_answer_question_path(answer.question, answer: answer), method: :post, data: { remote: true }, class: 'list__item-action list__item-action_type_basic'
     
@@ -7,9 +13,19 @@ li class=['answer', answer.best? ? 'answer_type_best' : '', 'list__item'] id ="a
     = link_to 'Edit', '#', class: 'list__item-action answer__edit-link'
     = link_to 'Delete', answer, method: :delete, data: { remote: true }, class: 'list__item-action list__item-action_type_alert'
     .form.form_type_inline.hidden
+      - if answer.files.attached?
+        .answer__files.list
+          - answer.files.each do |file|
+            .answer__file.list__item id ="answer-file-#{file.id}"
+              = link_to file.filename.to_s, url_for(file), class: 'list__item-title'
+              - if current_user.author?(answer)
+                = link_to 'Delete file', delete_file_answer_path(answer, file: file), method: :post, data: { remote: true }, class: 'list__item-action list__item-action_type_alert'
       = form_with model: answer, url: answer_path(answer), local: false do |f|
         div.form__field
           = f.label :body
           = f.text_area :body
+        div.form__field
+          = f.label :files
+          = f.file_field :files, multiple: true
         div.form__action
           = f.submit 'Save'

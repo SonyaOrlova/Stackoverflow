@@ -1,8 +1,12 @@
-.answer{
+.answer {
   &_type_best {
     &::before {
       content: '✓';
       color: darkgreen;
     }
+  }
+
+  &__files {
+    margin-top: 15px;
   }
 }

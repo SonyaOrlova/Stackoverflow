@@ -9,5 +9,8 @@
     div.form__field
       = f.label :body
       = f.text_area :body
+    div.form__field
+      = f.label :files
+      = f.file_field :files, multiple: true
     div.form__action
       = f.submit 'Ask'
