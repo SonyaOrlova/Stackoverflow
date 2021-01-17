@@ -26,6 +26,6 @@ li class=['answer', answer.best? ? 'answer_type_best' : '', 'list__item'] id ="a
           = f.text_area :body
         div.form__field
           = f.label :files
-          = f.file_field :files, multiple: true
+          = f.file_field :files, multiple: true, direct_upload: true
         div.form__action
           = f.submit 'Save'
