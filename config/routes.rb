@@ -11,4 +11,6 @@ Rails.application.routes.draw do
     post :set_best_answer, on: :member
     post :delete_file, on: :member
   end
+
+  resources :links, only: :destroy
 end

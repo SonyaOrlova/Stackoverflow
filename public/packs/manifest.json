@@ -1,15 +1,15 @@
 {
-  "application.js": "/packs/js/application-0267f7b79dcfcb70a02b.js",
-  "application.js.map": "/packs/js/application-0267f7b79dcfcb70a02b.js.map",
+  "application.js": "/packs/js/application-5ebf567e3b7c4b9905cc.js",
+  "application.js.map": "/packs/js/application-5ebf567e3b7c4b9905cc.js.map",
   "edit-inline-form.js": "/packs/js/edit-inline-form-91260ef49be85a580b37.js",
   "edit-inline-form.js.map": "/packs/js/edit-inline-form-91260ef49be85a580b37.js.map",
   "entrypoints": {
     "application": {
       "js": [
-        "/packs/js/application-0267f7b79dcfcb70a02b.js"
+        "/packs/js/application-5ebf567e3b7c4b9905cc.js"
       ],
       "js.map": [
-        "/packs/js/application-0267f7b79dcfcb70a02b.js.map"
+        "/packs/js/application-5ebf567e3b7c4b9905cc.js.map"
       ]
     },
     "edit-inline-form": {

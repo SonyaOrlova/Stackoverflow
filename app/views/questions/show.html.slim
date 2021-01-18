@@ -9,6 +9,13 @@
         - @question.files.each do |file|
           .question__file.list__item
             = link_to file.filename.to_s, url_for(file), class: 'list__item-title'
+    - if @question.links.present?
+      .question__links.list
+        - @question.links.each do |link|
+          .question__link.list__item
+            p = link.title
+            p _
+            p = link.url
 
   ul.answers.list
     - @question.answers.sort_by_best.each do |answer|
@@ -18,12 +25,4 @@
   - if user_signed_in?
     .form
       p.form__title New answer
-      = form_with model: [@question, @answer], local: false do |f|
-        div.form__field
-          = f.label :body
-          = f.text_area :body, class: 'new-answer-textarea'
-        div.form__field
-          = f.label :files
-          = f.file_field :files, multiple: true, direct_upload: true
-        div.form__action
-          = f.submit 'Reply'
+      = render 'answers/form', locals: { model: [@question, @answer], local: false }, button: 'Reply' 
