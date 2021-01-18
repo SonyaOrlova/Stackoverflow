@@ -18,13 +18,19 @@ class AnswersController < ApplicationController
     @answer.destroy if current_user.author?(@answer)
   end
 
+  def delete_file
+    @file = ActiveStorage::Attachment.find(params[:file])
+
+    @file.purge if current_user.author?(@file.record)
+  end
+
   private
 
   def answer
-    @answer = Answer.find(params[:id])
+    @answer = Answer.with_attached_files.find(params[:id])
   end
 
   def answer_params
-    params.require(:answer).permit(:body).merge({ author_id: current_user.id })
+    params.require(:answer).permit(:body, files: []).merge({ author_id: current_user.id })
   end
 end

@@ -16,9 +16,13 @@ feature 'Authenticated user can answer the question', js: true do
 
       fill_in 'answer_body', with: body
 
+      attach_file 'File', [Rails.root.join('spec/rails_helper.rb'), Rails.root.join('spec/spec_helper.rb')]
+
       click_on 'Reply'
 
-      expect(find('.list')).to have_content body
+      expect(page).to have_content body
+      expect(page).to have_link 'rails_helper.rb'
+      expect(page).to have_link 'spec_helper.rb'
       expect(page).to have_content 'Answer was successfully created'
     end
 
@@ -70,6 +74,24 @@ feature 'Authenticated user can update the answer', js: true do
       end
 
       expect(page).to have_content 'Answer was successfully updated'
+    end
+
+    scenario 'deletes the answer file successfuly' do
+      answer.files.attach Rack::Test::UploadedFile.new(Rails.root.join('spec/rails_helper.rb'))
+      answer.reload
+      visit question_path(question)
+
+      within "#answer-#{answer.id}" do
+        click_on 'Edit'
+
+        expect(page).to have_link 'rails_helper.rb'
+
+        click_on 'Delete file'
+
+        expect(page).not_to have_link 'rails_helper.rb'
+      end
+
+      expect(page).to have_content 'File was successfully deleted'
     end
 
     scenario 'updates the answer with failure' do

@@ -106,4 +106,24 @@ RSpec.describe QuestionsController, type: :controller do
       end
     end
   end
+
+  describe 'POST #delete_file' do
+    context 'author' do
+      before { sign_in_user(user) }
+
+      it 'deletes the question file' do
+        question = create(:question, :with_files_attached, author: user)
+
+        expect { post :delete_file, params: { id: question, file: question.files.first }, format: :js }.to change(question.files, :count).by(-1)
+      end
+    end
+
+    context 'not author' do
+      it 'can not delete the question file' do
+        question = create(:question, :with_files_attached, author: user)
+
+        expect { post :delete_file, params: { id: question, file: question.files.first }, format: :js }.not_to change(question.files, :count)
+      end
+    end
+  end
 end

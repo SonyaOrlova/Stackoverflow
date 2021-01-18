@@ -44,10 +44,14 @@ feature 'Authenticated user can ask the question' do
       fill_in 'question_title', with: title
       fill_in 'question_body', with: body
 
+      attach_file 'File', [Rails.root.join('spec/rails_helper.rb'), Rails.root.join('spec/spec_helper.rb')]
+
       click_on 'Ask'
 
       expect(page).to have_content title
       expect(page).to have_content body
+      expect(page).to have_link 'rails_helper.rb'
+      expect(page).to have_link 'spec_helper.rb'
       expect(page).to have_content 'Question was successfuly created'
     end
 
@@ -106,6 +110,24 @@ feature 'Authenticated user can update the question', js: true do
       click_on new_title
 
       expect(page).to have_content new_body
+    end
+
+    scenario 'deletes the question file successfuly' do
+      question.files.attach Rack::Test::UploadedFile.new(Rails.root.join('spec/rails_helper.rb'))
+      question.reload
+      visit questions_path
+
+      within "#question-#{question.id}" do
+        click_on 'Edit'
+
+        expect(page).to have_link 'rails_helper.rb'
+
+        click_on 'Delete file'
+
+        expect(page).not_to have_link 'rails_helper.rb'
+      end
+
+      expect(page).to have_content 'File was successfully deleted'
     end
 
     scenario 'updates the question with failure' do
