@@ -2,10 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Answer, type: :model do
   it { should belong_to :question }
+  it { should have_many(:links).dependent(:destroy) }
 
-  it { should validate_presence_of :body }
-
-  it 'have attached files' do
+  it 'should have attached files' do
     expect(Answer.new.files).to be_an_instance_of(ActiveStorage::Attached::Many)
   end
+
+  it { should validate_presence_of :body }
 end
